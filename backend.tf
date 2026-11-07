@@ -7,16 +7,18 @@ terraform {
   }
 
   required_version = ">= 1.2"
+ 
 
-
-  # backend "s3" {
-  #   bucket         = "carldev-lab-tfstate"
-  #   key            = "terraform.tfstate"
-  #   region         = "us-east-2"
-  #   dynamodb_table = "carldev-lab-tflock"
-  #   encrypt        = true
-  # }
+  backend "s3" {
+    bucket         = "carldev-lab-tfstate"
+    key            = "terraform.tfstate"
+    region         = "us-east-2"
+    use_lockfile   = true 
+    encrypt        = true
+  }
 }
+
+
 
 provider "aws" {
   region = var.aws_region
