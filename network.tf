@@ -139,6 +139,16 @@ resource "aws_route_table_association" "private" {
   route_table_id = aws_route_table.private.id
 }
 
+# Elastic IP para a instância EC2 (opcional)
+
+# resource "aws_eip" "eip" {
+  
+#   domain = "vpc"
+#   instance                  = aws_instance.ec2-large.id
+#   associate_with_private_ip = aws_instance.ec2-large.private_ip
+#   depends_on                = [aws_internet_gateway.main]
+# }
+
 # ---------- Security Groups ----------
 
 resource "aws_security_group" "ec2" {
