@@ -27,12 +27,6 @@ variable "environment" {
 }
 
 
-# My IP
-variable "my_ip" {
-  description = "Seu IP público para acesso SSH/kubectl"
-  type        = string
-}
-
 # ---------------- Rede ----------------
 
 variable "vpc_cidr" {

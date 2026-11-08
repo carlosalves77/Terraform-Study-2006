@@ -25,5 +25,3 @@ jobs:
       - run: terraform init
      
       - run: terraform plan -var-file="environments/prod.tfvars"
-        env:
-          TF_VAR_my_ip: ${{ secrets.MY_PUBLIC_IP }}

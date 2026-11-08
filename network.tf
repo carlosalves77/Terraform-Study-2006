@@ -156,14 +156,6 @@ resource "aws_security_group" "ec2" {
   description = "SG da instancia ec2-large"
   vpc_id      = aws_vpc.main.id
 
-  ingress {
-    description = "SSH"
-    from_port   = 22
-    to_port     = 22
-    protocol    = "tcp"
-    cidr_blocks = ["${trimspace(var.my_ip)}/32"] # ex: "200.x.x.x/32"
-  }
-
   # Tráfego livre entre instâncias que compartilham este SG (útil p/ cluster)
   ingress {
     from_port = 0
