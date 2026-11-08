@@ -1,7 +1,3 @@
-data "http" "public_ip" {
-   url = "http://ipv4.icanhazip.com"
-}
-
 data "aws_availability_zones" "available" {
   state = "available"
 
@@ -155,7 +151,7 @@ resource "aws_security_group" "ec2" {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = ["${trimspace(data.http.public_ip.response_body)}/32"] # ex: "200.x.x.x/32"
+    cidr_blocks = ["${trimspace(var.my_ip)}/32"] # ex: "200.x.x.x/32"
   }
 
   # Tráfego livre entre instâncias que compartilham este SG (útil p/ cluster)
