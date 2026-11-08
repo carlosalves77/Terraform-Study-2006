@@ -25,5 +25,4 @@ jobs:
       - run: terraform init
 
       - run: terraform apply -auto-approve -var-file="environments/prod.tfvars"
-        env:
-          TF_VAR_my_ip: ${{ secrets.MY_PUBLIC_IP }}
+  

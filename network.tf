@@ -139,20 +139,22 @@ resource "aws_route_table_association" "private" {
   route_table_id = aws_route_table.private.id
 }
 
+# Elastic IP para a instância EC2 (opcional)
+
+# resource "aws_eip" "eip" {
+  
+#   domain = "vpc"
+#   instance                  = aws_instance.ec2-large.id
+#   associate_with_private_ip = aws_instance.ec2-large.private_ip
+#   depends_on                = [aws_internet_gateway.main]
+# }
+
 # ---------- Security Groups ----------
 
 resource "aws_security_group" "ec2" {
   name        = "${var.project_name}-ec2-sg"
   description = "SG da instancia ec2-large"
   vpc_id      = aws_vpc.main.id
-
-  ingress {
-    description = "SSH"
-    from_port   = 22
-    to_port     = 22
-    protocol    = "tcp"
-    cidr_blocks = ["${trimspace(var.my_ip)}/32"] # ex: "200.x.x.x/32"
-  }
 
   # Tráfego livre entre instâncias que compartilham este SG (útil p/ cluster)
   ingress {
@@ -172,4 +174,10 @@ resource "aws_security_group" "ec2" {
   tags = {
     Name = "${var.project_name}-ec2-sg"
   }
+}
+
+# ---------- IAM Role para EC2 ----------
+resource "aws_iam_role_policy_attachment" "ec2_ssm" {
+  role       = aws_iam_role.ec2_role.name
+  policy_arn = "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"
 }
