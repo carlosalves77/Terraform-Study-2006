@@ -7,3 +7,7 @@ locals {
     volume_gb  = var.ec2_volume_gb
   }
 }
+
+locals {
+  environment = "prod"
+}
