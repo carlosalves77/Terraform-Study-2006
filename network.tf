@@ -160,7 +160,7 @@ resource "aws_security_group" "ec2" {
     from_port   = 50222
     to_port     = 50222
     protocol    = "tcp"
-    cidr_blocks = [var.my_ip]
+    cidr_blocks = ["${trimspace(var.my_ip)}/32"]
   }
 
   # Tráfego livre entre instâncias que compartilham este SG (útil p/ cluster)
