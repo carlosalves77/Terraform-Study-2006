@@ -156,6 +156,13 @@ resource "aws_security_group" "ec2" {
   description = "SG da instancia ec2-large"
   vpc_id      = aws_vpc.main.id
 
+  ingress {
+    from_port   = 50222
+    to_port     = 50222
+    protocol    = "tcp"
+    cidr_blocks = [var.my_ip]
+  }
+
   # Tráfego livre entre instâncias que compartilham este SG (útil p/ cluster)
   ingress {
     from_port = 0
@@ -176,8 +183,3 @@ resource "aws_security_group" "ec2" {
   }
 }
 
-# ---------- IAM Role para EC2 ----------
-resource "aws_iam_role_policy_attachment" "ec2_ssm" {
-  role       = aws_iam_role.ec2_role.name
-  policy_arn = "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"
-}
