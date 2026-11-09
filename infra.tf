@@ -52,7 +52,7 @@ resource "aws_instance" "ec2-large" {
 
     # Set SSH Port
     sed -i 's/^#\?Port .*/Port 50222/' /etc/ssh/sshd_config
-    systemctl restart sshd
+    systemctl restart ssh
   EOF
 
   
