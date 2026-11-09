@@ -26,6 +26,11 @@ variable "environment" {
   }
 }
 
+# Meu IP público
+variable "my_ip" {
+  description = "Seu IP público para acesso SSH/kubectl"
+  type        = string
+}
 
 # ---------------- Rede ----------------
 
