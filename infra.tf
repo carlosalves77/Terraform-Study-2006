@@ -50,7 +50,13 @@ resource "aws_instance" "ec2-large" {
     hostnamectl set-hostname ${var.project_name}
     apt-get update -y
     apt-get upgrade -y
+
+    # Set SSH Port
+    sed -i 's/^#\?Port .*/Port 50222/' /etc/ssh/sshd_config
+    systemctl restart sshd
   EOF
+
+  
 
   user_data_replace_on_change = true
 
