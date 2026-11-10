@@ -49,17 +49,16 @@ resource "aws_instance" "ec2-large" {
     hostnamectl set-hostname ${var.project_name}
     apt-get update -y
     apt-get upgrade -y
-
-    # Ubuntu 24.04 uses socket-activated SSH; override the socket's port,
-    # not just sshd_config (which the socket ignores for the ListenStream).
-    mkdir -p /etc/systemd/system/ssh.socket.d
-    printf '[Socket]\nListenStream=\nListenStream=50222\n' \
-      > /etc/systemd/system/ssh.socket.d/override.conf
-    sed -i 's/^#\?Port .*/Port 50222/' /etc/ssh/sshd_config
-    systemctl daemon-reload
-    systemctl restart ssh.socket
   EOF
 
+    # # Ubuntu 24.04 uses socket-activated SSH; override the socket's port,
+    # # not just sshd_config (which the socket ignores for the ListenStream).
+    # mkdir -p /etc/systemd/system/ssh.socket.d
+    # printf '[Socket]\nListenStream=\nListenStream=50222\n' \
+    #   > /etc/systemd/system/ssh.socket.d/override.conf
+    # sed -i 's/^#\?Port .*/Port 50222/' /etc/ssh/sshd_config
+    # systemctl daemon-reload
+    # systemctl restart ssh.socket
   
 
   user_data_replace_on_change = true
