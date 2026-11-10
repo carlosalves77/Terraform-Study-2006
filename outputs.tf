@@ -24,5 +24,5 @@ output "private_subnet_ids" {
 
 output "ec2_large_ssh" {
   description = "Comando SSH para a instância ec2-large"
-  value       = var.key_name == null ? "sem key pair — use SSM/EC2 Instance Connect" : "ssh -p 50222 -i ~/.ssh/${var.key_name}.pem ubuntu@${aws_instance.ec2-large.public_ip}"
+  value       = var.key_name == null ? "sem key pair — use SSM/EC2 Instance Connect" : "ssh -i ~/.ssh/${var.key_name}.pem ubuntu@${aws_instance.ec2-large.public_ip}"
 }
